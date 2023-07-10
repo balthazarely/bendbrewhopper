@@ -4,5 +4,14 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        lemonade: {
+          ...require("daisyui/src/theming/themes")["[data-theme=lemonade]"],
+        },
+      },
+    ],
+  },
 };
