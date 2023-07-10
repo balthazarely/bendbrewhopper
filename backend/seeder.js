@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import colors from "colors";
+dotenv.config();
 
 import connectDB from "./config/db.js";
 import Brewery from "./models/breweryModel.js";
@@ -10,7 +10,6 @@ import breweries from "./data/breweries.js";
 import users from "./data/users.js";
 import beers from "./data/beers.js";
 
-dotenv.config();
 connectDB();
 
 const importBreweryData = async () => {
