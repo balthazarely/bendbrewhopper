@@ -14,9 +14,6 @@
     "data:destroy": "node backend/seeder.js -destroy",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
-  "engines": {
-    "node": ">=14.20.0"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
