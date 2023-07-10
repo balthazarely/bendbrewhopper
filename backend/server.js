@@ -32,10 +32,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINDARY_API_SECRET,
 });
 
-app.get("/", (req, res) => {
-  res.send("API is running");
-});
-
 app.use("/api/users", userRoutes);
 app.use("/api/breweries", breweryRoutes);
 app.use("/api/beer", beerRoutes);
@@ -47,17 +43,17 @@ app.use("/api/upload-cloud", uploadRoutesCloudinary);
 
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
-  app.use("/uploads", express.static("/var/data/uploads"));
+  // app.use("/uploads", express.static("/var/data/uploads"));
   app.use(express.static(path.join(__dirname, "/frontend/build")));
 
   app.get("*", (req, res) =>
     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
   );
 } else {
-  const __dirname = path.resolve();
-  app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+  // const __dirname = path.resolve();
+  // app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
   app.get("/", (req, res) => {
-    res.send("API is running....");
+    res.send(`${CLOUDINDARY_CLOUD_NAME} - API is running....`);
   });
 }
 app.listen(port, () => {
