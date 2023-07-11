@@ -5,7 +5,6 @@ import {
   BreweriesMap,
   BreweriesPanel,
   BreweriesFilter,
-  LeafletMap,
 } from "../components/mapPage";
 import { FullPageLoader, PageWrapper } from "../components/elements";
 import { calcBreweryDistance, getUserCoordinates } from "../utils/mapFunctions";
@@ -88,7 +87,6 @@ export default function MapScreen() {
             selectedBrewery={selectedBrewery}
             sortFilterBy={sortFilterBy}
           />
-          {/* <LeafletMap /> */}
         </div>
       </div>
     </PageWrapper>
