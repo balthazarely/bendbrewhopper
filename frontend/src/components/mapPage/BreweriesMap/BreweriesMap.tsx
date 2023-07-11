@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useRef, useEffect, useContext, useState } from "react";
+// eslint-disable-next-line import/no-webpack-loader-syntax
 import mapboxgl, { LngLatLike, Map, Popup } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { convertToGeoJSON } from "../../../utils/convertToGeoJson";
