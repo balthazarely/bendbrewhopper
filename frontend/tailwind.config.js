@@ -1,21 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "node_modules/daisyui/dist/**/*.js",
-    "node_modules/react-daisyui/dist/**/*.js",
-  ],
-  theme: {
-    extend: {},
-  },
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   plugins: [require("daisyui")],
-  daisyui: {
-    themes: [
-      {
-        lemonade: {
-          ...require("daisyui/src/theming/themes")["[data-theme=lemonade]"],
-        },
-      },
-    ],
-  },
+  // theme: {
+  //   extend: {},
+  // },
+  // plugins: [require("daisyui")],
+  // daisyui: {
+  //   themes: [
+  //     {
+  //       lemonade: {
+  //         ...require("daisyui/src/theming/themes")["[data-theme=lemonade]"],
+  //       },
+  //     },
+  //   ],
+  // },
 };
