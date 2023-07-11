@@ -15,6 +15,7 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "axios": "^1.4.0",
+    "daisyui": "^3.2.1",
     "mapbox-gl": "^2.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -54,7 +55,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
-    "daisyui": "^3.2.1",
     "postcss": "^8.4.25",
     "tailwindcss": "^3.3.2",
     "vite": "^4.3.9"
