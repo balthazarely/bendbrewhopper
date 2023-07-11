@@ -1,6 +1,5 @@
-// @ts-nocheck
-import React, { useRef, useEffect, useContext, useState } from "react";
 // eslint-disable-next-line import/no-webpack-loader-syntax
+import React, { useRef, useEffect, useContext, useState } from "react";
 import mapboxgl, { LngLatLike, Map, Popup } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { convertToGeoJSON } from "../../../utils/convertToGeoJson";
@@ -8,6 +7,14 @@ import customMarkerImg from "../../../../public/hop.png";
 import customMarkerImgWine from "../../../../public/wine.png";
 import { Brewery } from "../../../types";
 
+// Dynamically load the worker script using the webpack's import() function
+// and provide the correct path to the worker script
+//@ts-ignore
+const loadWorker = () => import("mapbox-gl/dist/mapbox-gl-csp-worker");
+loadWorker().then(() => {
+  //@ts-ignore
+  mapboxgl.workerClass = require("mapbox-gl/dist/mapbox-gl-csp-worker").default;
+});
 interface BreweriesMapProps {
   breweries: Brewery[];
   setSelectedBrewery: (state: Brewery) => void;
@@ -24,15 +31,15 @@ export function BreweriesMap({
   const geoJSONBreweries = convertToGeoJSON(breweries, "brewery");
   const geoJSONWineries = convertToGeoJSON(breweries, "winery");
 
-  const [selectedPoint, setSelectedPoint] = useState(null);
+  const [selectedPoint, setSelectedPoint] = useState<any>(null);
   const popupRef = useRef(new mapboxgl.Popup({ closeOnClick: false }));
 
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(-105.9);
-  const [lat, setLat] = useState(39.35);
-  const [zoom, setZoom] = useState(10);
-  const [styleDataSet, setStyleDataSet] = useState(false);
+  const mapContainer = useRef<any>(null);
+  const map = useRef<any>(null);
+  const [lng, setLng] = useState<any>(-105.9);
+  const [lat, setLat] = useState<any>(39.35);
+  const [zoom, setZoom] = useState<any>(10);
+  const [styleDataSet, setStyleDataSet] = useState<any>(false);
 
   const MAPBOX_TOKEN =
     "pk.eyJ1IjoiYmFsdGhhemFyZWx5IiwiYSI6ImNrZzQ3YjMxcjBocTcyc2xwMG96MGQ4Y24ifQ.SHxeF6FTzlNpMSnfGz-qqg";
@@ -136,7 +143,7 @@ export function BreweriesMap({
             "circle-stroke-color": "#fff",
           },
         });
-        map.current?.on("click", "unclustered-breweries", (e) => {
+        map.current?.on("click", "unclustered-breweries", (e: any) => {
           const coordinates = e.features[0].geometry.coordinates.slice();
           const brewery = e.features[0].properties;
           setSelectedPoint({
@@ -144,7 +151,7 @@ export function BreweriesMap({
             brewery: brewery,
           });
         });
-        map.current?.on("click", "clusters", (e) => {
+        map.current?.on("click", "clusters", (e: any) => {
           const features = map.current.queryRenderedFeatures(e.point, {
             layers: ["clusters"],
           });
@@ -152,7 +159,7 @@ export function BreweriesMap({
 
           map.current
             .getSource("breweries")
-            .getClusterExpansionZoom(clusterId, (err, zoom) => {
+            .getClusterExpansionZoom(clusterId, (err: any, zoom: any) => {
               if (err) return;
 
               map.current.easeTo({
@@ -235,7 +242,7 @@ export function BreweriesMap({
             "circle-stroke-color": "#fff",
           },
         });
-        map.current?.on("click", "unclustered-wineries", (e) => {
+        map.current?.on("click", "unclustered-wineries", (e: any) => {
           const coordinates = e.features[0].geometry.coordinates.slice();
           const brewery = e.features[0].properties;
           setSelectedPoint({
@@ -243,7 +250,7 @@ export function BreweriesMap({
             brewery: brewery,
           });
         });
-        map.current?.on("click", "clusters-wine", (e) => {
+        map.current?.on("click", "clusters-wine", (e: any) => {
           const features = map.current.queryRenderedFeatures(e.point, {
             layers: ["clusters-wine"],
           });
@@ -251,7 +258,7 @@ export function BreweriesMap({
 
           map.current
             .getSource("wineries")
-            .getClusterExpansionZoom(clusterId, (err, zoom) => {
+            .getClusterExpansionZoom(clusterId, (err: any, zoom: any) => {
               if (err) return;
 
               map.current.easeTo({
@@ -264,7 +271,7 @@ export function BreweriesMap({
     });
   }, []);
 
-  const flyToCoords = (long, lat) => {
+  const flyToCoords = (long: any, lat: any) => {
     map.current?.flyTo({
       center: [Number(lat), Number(long)],
       zoom: 16,
@@ -294,12 +301,13 @@ export function BreweriesMap({
     },
   };
 
-  const toggleCategory = (str, property) => {
+  const toggleCategory = (str: any, property: any) => {
     map.current?.setLayoutProperty(str, "visibility", property);
   };
 
   useEffect(() => {
     if (map.current && styleDataSet) {
+      //@ts-ignore
       const visibility = visibilityLookup[sortFilterBy];
 
       if (visibility) {
