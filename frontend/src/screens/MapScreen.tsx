@@ -82,13 +82,13 @@ export default function MapScreen() {
           } z-50 bottom-0 left-96 w-96 overflow-hidden `}
         ></div>
         <div className="relative w-1/2 brewery-map-wrapper overflow-hidden">
-          <BreweriesMap
+          {/* <BreweriesMap
             breweries={breweries}
             setSelectedBrewery={setSelectedBrewery}
             selectedBrewery={selectedBrewery}
             sortFilterBy={sortFilterBy}
-          />
-          {/* <LeafletMap /> */}
+          /> */}
+          <LeafletMap />
         </div>
       </div>
     </PageWrapper>

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-webpack-loader-syntax
 import React, { useRef, useEffect, useContext, useState } from "react";
 import mapboxgl, { LngLatLike, Map, Popup } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -7,14 +6,6 @@ import customMarkerImg from "../../../../public/hop.png";
 import customMarkerImgWine from "../../../../public/wine.png";
 import { Brewery } from "../../../types";
 
-// Dynamically load the worker script using the webpack's import() function
-// and provide the correct path to the worker script
-//@ts-ignore
-const loadWorker = () => import("mapbox-gl/dist/mapbox-gl-csp-worker");
-loadWorker().then(() => {
-  //@ts-ignore
-  mapboxgl.workerClass = require("mapbox-gl/dist/mapbox-gl-csp-worker").default;
-});
 interface BreweriesMapProps {
   breweries: Brewery[];
   setSelectedBrewery: (state: Brewery) => void;
