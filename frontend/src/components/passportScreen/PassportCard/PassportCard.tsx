@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { convertToReadableDate } from "../../../utils/dateFuncitons";
 import { CloudImage } from "../../elements";
+import { HiCog } from "react-icons/hi2";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { HiTrash } from "react-icons/hi";
 
 // interface PassportCardProps {
 //   brewery: any;
@@ -18,13 +21,25 @@ export function PassportCard({
 }: any) {
   return (
     <div className={`flex flex-col gap-1 p-2 rounded-lg shadow`}>
-      <div className="w-full h-44  flex justify-center items-center overflow-hidden  bg-gray-300 rounded-lg relative">
+      <div className="w-full h-44 group flex justify-center items-center overflow-hidden  bg-gray-300 rounded-lg relative">
         <CloudImage
           classes=" object-cover "
           image={breweryVisitInfo?.brewery?.image}
           width={400}
           height={300}
         />
+        <button
+          className="btn btn-sm  group-hover:visible invisible join-item absolute top-1 right-1"
+          onClick={() => {
+            setPassportForDeletion({
+              id: breweryVisitInfo?._id,
+              name: breweryVisitInfo?.brewery?.name,
+            });
+            setConfrimActionModalOpen(true);
+          }}
+        >
+          <HiTrash />
+        </button>
       </div>
       <div className="flex justify-between flex-col py-1   ">
         <div>
@@ -43,32 +58,17 @@ export function PassportCard({
             {breweryVisitInfo?.beers?.length !== 0 && (
               <>
                 <div className="font-bold text-sm mt-2">Beers Sampled:</div>
-                {breweryVisitInfo?.beers.map((beer: any) => {
-                  return (
-                    <div key={beer._id}>
-                      <div className="text-xs">{beer.name}</div>
-                    </div>
-                  );
-                })}
+                <div className="flex gap-1">
+                  {breweryVisitInfo?.beers.map((beer: any) => {
+                    return (
+                      <div key={beer._id} className="text-xs">
+                        {beer.name},
+                      </div>
+                    );
+                  })}
+                </div>
               </>
             )}
-          </div>
-          <div>
-            <button
-              className="btn btn-xs join-item"
-              onClick={() => {
-                setPassportForDeletion({
-                  id: breweryVisitInfo?._id,
-                  name: breweryVisitInfo?.brewery?.name,
-                });
-                setConfrimActionModalOpen(true);
-              }}
-            >
-              Delete
-            </button>
-            {/* <button disabled className="btn btn-xs join-item">
-              Edit
-            </button> */}
           </div>
         </div>
       </div>

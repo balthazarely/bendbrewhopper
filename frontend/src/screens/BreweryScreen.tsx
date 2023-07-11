@@ -74,6 +74,7 @@ export default function BreweryScreen() {
               </div>
             </div>
           </div>
+          <div className="max-w-2xl">{brewery.description}</div>
           <div className="divider"></div>
           <div className="text-xl font-bold">Our Beers</div>
           <div className="mb-16 mt-4 flex overflow-y-scroll pb-5">
@@ -83,9 +84,9 @@ export default function BreweryScreen() {
           </div>
         </PageWrapper>
 
-        <div className="w-full flex h-96 bg-gray-300 rounded-lg relative">
+        {/* <div className="w-full flex h-96 bg-gray-300 rounded-lg relative">
           <SingleBreweryMap lat={brewery.lat} long={brewery.long} />
-        </div>
+        </div> */}
       </div>
 
       <CheckInModal

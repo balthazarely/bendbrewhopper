@@ -106,22 +106,21 @@ export default function AdminEditBreweryScreen() {
   return (
     <PageWrapper>
       <PageHeader title={`${brewery?.name} Dashboard`} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4  ">
-        <div className="bg-base-100 p-4 rounded-lg">
-          <AdminBreweryInfo
-            onSubmit={onSubmit}
-            handleSubmit={handleSubmit}
-            brewery={brewery}
-            errors={errors}
-            register={register}
-            previewUrl={previewUrl}
-            previewUrlLogo={previewUrlLogo}
-            isLoading={isLoading}
-            uploadFileHandler={uploadFileHandler}
-            uploadedImageLoading={uploadedImageLoading}
-            uploadedLogoLoading={uploadedLogoLoading}
-          />
-        </div>
+      <div className="flex flex-row gap-4  ">
+        <AdminBreweryInfo
+          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
+          brewery={brewery}
+          errors={errors}
+          register={register}
+          previewUrl={previewUrl}
+          previewUrlLogo={previewUrlLogo}
+          isLoading={isLoading}
+          uploadFileHandler={uploadFileHandler}
+          uploadedImageLoading={uploadedImageLoading}
+          uploadedLogoLoading={uploadedLogoLoading}
+        />
+        <div className="divider divider-horizontal"></div>
         <AdminBeerPanel
           breweryId={brewery?._id}
           isLoading={isLoading}

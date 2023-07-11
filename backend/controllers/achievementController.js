@@ -1,10 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Achievement from "../models/achievmentModel.js";
 import Coupon from "../models/couponModel.js";
-import User from "../models/userModel.js";
 import QRCode from "qrcode";
-import path from "path";
-import mongoose from "mongoose";
 
 const getAllAchievements = asyncHandler(async (req, res) => {
   const achievements = await Achievement.find({})
@@ -67,11 +64,10 @@ const createCoupon = asyncHandler(async (req, res) => {
   });
 
   const couponId = coupon._id;
-  const qrCodeData = `http://localhost:5173/admin/redeem-coupon/?id=${couponId}`;
+  const qrCodeData = `${process.env.COUPON_BASE_URL}admin/redeem-coupon/?id=${couponId}`;
   const qrCode = await QRCode.toDataURL(qrCodeData);
   coupon.qrCode = qrCode;
   await coupon.save();
-
   res.status(200).json(coupon);
 });
 

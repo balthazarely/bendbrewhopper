@@ -73,7 +73,7 @@ export default function MapScreen() {
               setSelectedBrewery={setSelectedBrewery}
             />
           </div>
-          <div className="bg-gradient-to-b from-transparent to-white w-full h-10 absolute bottom-0 left-0 z-50 "></div>
+          <div className="bg-gradient-to-b from-transparent to-base-100 w-full h-10 absolute bottom-0 left-0 z-50 "></div>
         </div>
         <div
           className={`${

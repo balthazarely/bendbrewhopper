@@ -59,7 +59,7 @@ export function AchievementsSection({ userPassportData }: any) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+    <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mt-4">
       {achievements?.map((achievement: any) => {
         return (
           <AchievementCard
@@ -70,6 +70,7 @@ export function AchievementsSection({ userPassportData }: any) {
             }
             uniqueUserBreweriesVisited={uniqueUserBreweriesVisited}
             achievement={achievement}
+            userCoupons={userCoupons}
           />
         );
       })}

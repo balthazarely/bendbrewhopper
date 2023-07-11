@@ -29,7 +29,7 @@ export function AdminBeerPanel({
   };
 
   return (
-    <div className="p-4 rounded-lg bg-base-200">
+    <div className="p-4 rounded-lg w-full">
       <h2 className="text-xl w-full font-bold">Edit Beers</h2>
       <div className="my-4">
         <button
@@ -41,6 +41,7 @@ export function AdminBeerPanel({
       </div>
       {!isLoading ? (
         <div
+          className=" p-4 rounded-lg"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(144px, 1fr))",

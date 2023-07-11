@@ -32,7 +32,7 @@ export function AdminBreweryInfo({
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col max-w-lg w-full"
+        className="flex flex-col max-w-lg w-full p-4"
       >
         <h2 className="text-xl w-full font-bold">Edit listing</h2>
         <div className="grid grid-cols-2 gap-2 mt-6">

@@ -77,9 +77,14 @@ export function Navbar() {
           className="dropdown-content menu w-52 rounded-md bg-base-100 shadow  "
         >
           {userInfo?.isAdmin ? (
-            <li>
-              <Link to="/admin">Admin Dashboard</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/admin">Admin Dashboard</Link>
+              </li>
+              <li>
+                <Link to="/admin/redeem-coupon">Redeem Coupons</Link>
+              </li>
+            </>
           ) : (
             <li>
               <a>Profile</a>

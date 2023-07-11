@@ -4,69 +4,51 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import { LoginForm, RegisterForm } from "../components/forms";
 // import { RootState } from "../store";
 
 const LoginScreen: React.FC = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [login, { isLoading }] = useLoginMutation();
-  // const { userInfo } = useSelector((state: RootState) => state.auth);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
-      navigate("/");
-    } catch (error: any) {
-      toast.error(error?.data.message || error?.error);
-      console.log(error);
-    }
-  };
+  const [loginShowing, setLoginShowing] = useState(true);
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="w-full border-2 border-red-500">
+      <div className=" mx-auto">
+        <div className="bg-base-200 mx-auto py-12 max-w-xs flex justify-center flex-col ">
+          <div className="font-bold text-center flex flex-col gap-2 text-2xl text-primary  justify-center items-center ">
+            {/* <BiDumbbell className="text-5xl text-base-100 rounded-full  p-1 bg-primary" /> */}
+            Welcome to BendBrewHopper
+          </div>
+          <div className="w-full relative  overflow-x-hidden overflow-y-visible ">
+            <div
+              className={`transform transition-transform duration-200 px-3 py-6 ${
+                loginShowing ? "translate-x-0" : "-translate-x-full"
+              }`}
+            >
+              <LoginForm />
+              <button
+                onClick={() => setLoginShowing(false)}
+                className="btn-link w-full text-sm  text-center mt-4 border-2"
+              >
+                Don&apos;t have an account? Sign up for a one.
+              </button>
+            </div>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
+            <div
+              className={`w-full  px-3 py-6 absolute top-0 left-0 transform transition-transform duration-200 ${
+                loginShowing ? "translate-x-full" : " translate-x-0"
+              }`}
+            >
+              <RegisterForm />
+              <button
+                onClick={() => setLoginShowing(true)}
+                className="btn-link text-sm w-full text-center mt-4 border-2"
+              >
+                Already have an account? Sign in here
+              </button>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
-        </div>
-        <button disabled={isLoading} type="submit">
-          Sign In
-        </button>
-      </form>
-      {isLoading ? "LOADING" : ""}
-      <Link to="/register">Click to register</Link>
+      </div>
     </div>
   );
 };

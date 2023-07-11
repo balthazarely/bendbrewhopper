@@ -14,7 +14,7 @@ import {
 const router = Router();
 router
   .route("/")
-  .get(protect, admin, getAllAchievements)
+  .get(protect, getAllAchievements)
   .post(protect, admin, addAchievement);
 
 router
