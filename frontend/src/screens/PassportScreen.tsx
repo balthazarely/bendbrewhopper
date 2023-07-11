@@ -8,8 +8,10 @@ import { AchievementsSection } from "../components/passportScreen/AchievementsSe
 import { useGetUserProfileQuery } from "../slices/passportSlice";
 
 export default function PassportScreen() {
-  const { data: userPassportData } = useGetUserProfileQuery({});
+  const { data: userPassportData, isLoading: loadingUserPassportData } =
+    useGetUserProfileQuery({});
   const [activeTab, setActiveTab] = useState<string>("passport");
+
   return (
     <PageWrapper>
       <PageHeader title="My Passport" />
@@ -36,7 +38,10 @@ export default function PassportScreen() {
         </div>
       </div>
       {activeTab === "passport" && (
-        <PassportSection userPassportData={userPassportData} />
+        <PassportSection
+          loadingUserPassportData={loadingUserPassportData}
+          userPassportData={userPassportData}
+        />
       )}
       {activeTab === "reviews" && <BeerReviewsSection />}
       {activeTab === "achievements" && (

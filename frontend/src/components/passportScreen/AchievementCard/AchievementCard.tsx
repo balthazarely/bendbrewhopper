@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
-import { HiCheck, HiCheckCircle } from "react-icons/hi2";
+import { HiCheckCircle } from "react-icons/hi2";
+import { Achievement, Brewery, Coupon } from "../../../types";
+
+interface AchievementCardProps {
+  handleOpenCouponModal: (achievement: Achievement) => void;
+  handlePreviewAchievemenetLocations: (achievement: Achievement) => void;
+  uniqueUserBreweriesVisited: any;
+  achievement: Achievement;
+  userCoupons: Coupon[];
+}
 
 export function AchievementCard({
   handleOpenCouponModal,
@@ -7,11 +16,11 @@ export function AchievementCard({
   uniqueUserBreweriesVisited,
   achievement,
   userCoupons,
-}: any) {
+}: AchievementCardProps) {
   const [isActive, setIsActive] = useState(false);
 
-  const countMatchingItems = (arr1: any, arr2: any) => {
-    const idsArr1 = arr1.map((item: any) => item._id);
+  const countMatchingItems = (arr1: Brewery[], arr2: Brewery[]) => {
+    const idsArr1 = arr1.map((item: Brewery) => item._id);
     const matchingItems = arr2.filter((item: any) => idsArr1.includes(item.id));
     return matchingItems.length;
   };
@@ -25,12 +34,14 @@ export function AchievementCard({
       : false;
 
   useEffect(() => {
-    const hasCouponBeenRedeemed = (achievement: any) => {
+    const hasCouponBeenRedeemed = (achievement: Achievement) => {
       const target = userCoupons.find(
-        (coupon: any) => coupon.achievement === achievement._id
+        (coupon: Coupon) => coupon.achievement === achievement._id
       );
       if (target) {
         setIsActive(target.isActive);
+      } else {
+        setIsActive(true);
       }
     };
     hasCouponBeenRedeemed(achievement);

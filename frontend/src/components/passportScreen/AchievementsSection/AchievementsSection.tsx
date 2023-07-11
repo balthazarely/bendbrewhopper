@@ -7,27 +7,34 @@ import { FullPageLoader } from "../../elements";
 import { AchievementBreweryModal, CouponModal } from "..";
 import { useState } from "react";
 import { AchievementCard } from "../AchievementCard";
+import { Achievement, Coupon, UserPassport } from "../../../types";
 
-export function AchievementsSection({ userPassportData }: any) {
+export function AchievementsSection({
+  userPassportData,
+}: {
+  userPassportData: UserPassport;
+}) {
   const { data: achievements, isLoading: achievementsLoading } =
     useGetAchievementsQuery({});
   const { data: userCoupons } = useGetUserCouponsQuery({});
   const [createCoupon] = useCreateCouponMutation({});
 
-  const [activeCoupon, setActiveCoupon] = useState<any>(null);
+  // Local State
+  const [activeCoupon, setActiveCoupon] = useState<Coupon | null>(null);
   const [couponModalOpen, setCouponModalOpen] = useState<boolean>(false);
-  const [achievementToPreview, setAchievementToPreview] = useState<any>(null);
+  const [achievementToPreview, setAchievementToPreview] =
+    useState<Achievement | null>(null);
   const [achievementPreviewModalOpen, setAchievementPreviewModalOpen] =
     useState<boolean>(false);
 
-  const handlePreviewAchievemenetLocations = (achievement: any) => {
+  const handlePreviewAchievemenetLocations = (achievement: Achievement) => {
     setAchievementToPreview(achievement);
     setAchievementPreviewModalOpen(true);
   };
 
-  const handleOpenCouponModal = async (achievement: any) => {
+  const handleOpenCouponModal = async (achievement: Achievement) => {
     const coupon = userCoupons.find(
-      (userCoupon: any) => userCoupon.achievement === achievement._id
+      (userCoupon: Coupon) => userCoupon.achievement === achievement._id
     );
     if (!coupon) {
       const createdCoupon = await createCoupon({
@@ -60,7 +67,7 @@ export function AchievementsSection({ userPassportData }: any) {
 
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 mt-4">
-      {achievements?.map((achievement: any) => {
+      {achievements?.map((achievement: Achievement) => {
         return (
           <AchievementCard
             key={achievement._id}

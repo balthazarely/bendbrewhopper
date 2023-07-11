@@ -8,11 +8,17 @@ import { FullPageLoader } from "../../elements";
 import { BeerReviewsFilterPanel } from "../BeerReviewsFilterPanel";
 import { BeerReviewCard } from "../BeerReviewCard";
 import { BeerReviewEditModal } from "..";
+import { Review } from "../../../types";
 
-interface ReviewForDeletionType {
+export type ReviewForDeletionType = {
   id: string;
-  beerId: string;
+  beerId: string | null;
   name: string;
+};
+
+export interface FilterProps {
+  style: string[];
+  brewery: string[];
 }
 
 export function BeerReviewsSection() {
@@ -20,7 +26,7 @@ export function BeerReviewsSection() {
     useGetUserReviewsQuery({});
   const [deleteUserReviews, { isLoading: deleteLoading }] =
     useDeleteUserReviewsMutation({});
-  const [selectedFilter, setSelectedFilter] = useState<any>({
+  const [selectedFilter, setSelectedFilter] = useState<FilterProps>({
     style: [],
     brewery: [],
   });
@@ -32,7 +38,7 @@ export function BeerReviewsSection() {
       beerId: "",
       name: "",
     });
-  const [reviewForEdit, setReviewForEdit] = useState<any>(null);
+  const [reviewForEdit, setReviewForEdit] = useState<Review | null>(null);
   const [reviewEditModalOpen, setReviewEditModalOpen] =
     useState<boolean>(false);
 
@@ -44,7 +50,7 @@ export function BeerReviewsSection() {
     setConfrimActionModalOpen(false);
   };
 
-  const filteredReviews = userReviews?.filter((review: any) => {
+  const filteredReviews = userReviews?.filter((review: Review) => {
     const beerStyleFilter =
       selectedFilter.style.length === 0 ||
       selectedFilter.style.includes(review.style);
@@ -54,7 +60,7 @@ export function BeerReviewsSection() {
     return beerStyleFilter && breweryFilter;
   });
 
-  const handleEditReview = (review: any) => {
+  const handleEditReview = (review: Review) => {
     setReviewForEdit(review);
     setReviewEditModalOpen(true);
   };
@@ -74,6 +80,8 @@ export function BeerReviewsSection() {
     );
   }
 
+  console.log(userReviews);
+
   return (
     <div className="mt-4">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative ">
@@ -83,7 +91,7 @@ export function BeerReviewsSection() {
           selectedFilter={selectedFilter}
         />
         <div className=" col-span-4  overflow-y-auto">
-          {filteredReviews?.map((reviewItem: any) => {
+          {filteredReviews?.map((reviewItem: Review) => {
             return (
               <BeerReviewCard
                 review={reviewItem}

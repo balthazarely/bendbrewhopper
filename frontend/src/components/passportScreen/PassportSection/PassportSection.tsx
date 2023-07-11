@@ -3,11 +3,17 @@ import { PassportCard } from "..";
 import { useDeletePassportBreweryMutation } from "../../../slices/passportSlice";
 import { ConfirmActionModal } from "../../modals";
 import { FullPageLoader } from "../../elements";
+import { Brewery, UserPassport } from "../../../types";
+
+interface PassportSectionProps {
+  userPassportData: UserPassport;
+  loadingUserPassportData: boolean;
+}
 
 export function PassportSection({
   userPassportData,
   loadingUserPassportData,
-}: any) {
+}: PassportSectionProps) {
   const [deletePassportBrewery, { isLoading: loadingDelete }] =
     useDeletePassportBreweryMutation({});
 
@@ -40,7 +46,7 @@ export function PassportSection({
   return (
     <>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-        {userPassportData?.breweriesVisited?.map((brewery: any) => {
+        {userPassportData?.breweriesVisited?.map((brewery: Brewery) => {
           return (
             <PassportCard
               key={brewery._id}

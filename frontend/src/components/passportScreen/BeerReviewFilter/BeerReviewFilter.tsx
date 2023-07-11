@@ -1,9 +1,18 @@
+import { FilterProps } from "../BeerReviewsSection/BreweryReviewsSection";
+
+interface BeerReviewFilterProps {
+  name: string;
+  filterItem: string[];
+  selectedFilters: any;
+  handleFilterClick: (item: any, name: any) => void;
+}
+
 export function BeerReviewFilter({
   name,
   filterItem,
   selectedFilters,
   handleFilterClick,
-}: any) {
+}: BeerReviewFilterProps) {
   return (
     <div className="">
       <div className="font-bold text-sm capitalize mt-4 ">{name}</div>
@@ -11,7 +20,7 @@ export function BeerReviewFilter({
         className="divider my-0
       "
       ></div>
-      {filterItem?.map((item: any) => {
+      {filterItem?.map((item: string) => {
         return (
           <div className="flex items-center" key={item}>
             <input

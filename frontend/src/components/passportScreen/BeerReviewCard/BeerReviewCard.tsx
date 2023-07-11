@@ -1,12 +1,21 @@
+import { Review } from "../../../types";
 import { convertToReadableDate } from "../../../utils/dateFuncitons";
 import { CloudImage } from "../../elements";
+import { ReviewForDeletionType } from "../BeerReviewsSection/BreweryReviewsSection";
+
+interface BeerReviewCard {
+  review: Review;
+  setReviewForDeletion: (data: ReviewForDeletionType) => void;
+  setConfrimActionModalOpen: (state: boolean) => void;
+  handleEditReview: (review: Review) => void;
+}
 
 export function BeerReviewCard({
   review,
   setReviewForDeletion,
   setConfrimActionModalOpen,
   handleEditReview,
-}: any) {
+}: BeerReviewCard) {
   const number = 5;
   const iterableArray = Array.from({ length: number }, (_, index) => index);
 

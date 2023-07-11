@@ -1,5 +1,6 @@
 import { HiX } from "react-icons/hi";
 import { CloudImage } from "../../elements";
+import { Brewery } from "../../../types";
 
 interface AddBeerModalProps {
   achievementToPreview: any;
@@ -32,24 +33,26 @@ export function AchievementBreweryModal({
 
           <div className="">
             <div className="mb-2 font-bold text-xl">Breweries</div>
-            {achievementToPreview?.achivementBreweries?.map((brewery: any) => {
-              return (
-                <div
-                  key={brewery._id}
-                  className="flex border-b-2  items-center gap-4 mb-2"
-                >
-                  <div className=" w-12 h-12">
-                    <CloudImage
-                      classes="object-contain"
-                      image={brewery?.logoImage}
-                      width={400}
-                      height={400}
-                    />
+            {achievementToPreview?.achivementBreweries?.map(
+              (brewery: Brewery) => {
+                return (
+                  <div
+                    key={brewery._id}
+                    className="flex border-b-2  items-center gap-4 mb-2"
+                  >
+                    <div className=" w-12 h-12">
+                      <CloudImage
+                        classes="object-contain"
+                        image={brewery?.logoImage}
+                        width={400}
+                        height={400}
+                      />
+                    </div>
+                    <div className="p-2 font-bold text-sm">{brewery.name}</div>
                   </div>
-                  <div className="p-2 font-bold text-sm">{brewery.name}</div>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
         </div>
       </div>

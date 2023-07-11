@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import { CloudImage } from "../../elements";
+import { Brewery } from "../../../types";
 
-export function NearBeweryCard({ brewery, handleCheckIn }: any) {
+interface NearBeweryCardProps {
+  brewery: Brewery;
+  handleCheckIn: (brewery: Brewery) => void;
+}
+
+export function NearBeweryCard({
+  brewery,
+  handleCheckIn,
+}: NearBeweryCardProps) {
   return (
     <div className={` flex flex-col  p-2    rounded-lg shadow-xl  `}>
       <div className=" w-80  max-h-44 h-full flex justify-center items-center overflow-hidden  bg-gray-300 rounded-lg relative">

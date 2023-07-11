@@ -1,18 +1,8 @@
 import { Link } from "react-router-dom";
 import { convertToReadableDate } from "../../../utils/dateFuncitons";
 import { CloudImage } from "../../elements";
-import { HiCog } from "react-icons/hi2";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiTrash } from "react-icons/hi";
-
-// interface PassportCardProps {
-//   brewery: any;
-//   setPassportForDeletion: {
-//     id: string;
-//     name: string;
-//   };
-//   setConfrimActionModalOpen: (state: boolean) => void;
-// }
+import { Beer } from "../../../types";
 
 export function PassportCard({
   brewery: breweryVisitInfo,
@@ -59,7 +49,7 @@ export function PassportCard({
               <>
                 <div className="font-bold text-sm mt-2">Beers Sampled:</div>
                 <div className="flex gap-1">
-                  {breweryVisitInfo?.beers.map((beer: any) => {
+                  {breweryVisitInfo?.beers.map((beer: Beer) => {
                     return (
                       <div key={beer._id} className="text-xs">
                         {beer.name},

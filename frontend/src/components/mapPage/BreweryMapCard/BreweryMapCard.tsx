@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { Brewery } from "../../../types";
-import { HiStar } from "react-icons/hi2";
-import { HiLocationMarker } from "react-icons/hi";
 import { CloudImage } from "../../elements";
 import { convertFeetToMiles } from "../../../utils/mapFunctions";
 
@@ -44,7 +42,9 @@ export function BreweryMapCard({
         <div className="flex flex-col  gap-1">
           <div className="font-extrabold text-sm leading-5">{brewery.name}</div>
           <div className="flex items-center gap-1">
-            <div className="text-xs">{brewery.address.split(",")[0]}</div>
+            <div className="text-xs">
+              {brewery.address}, {brewery.city}, {brewery.state} {brewery.zip}
+            </div>
           </div>
         </div>
         <div className="flex justify-between items-center mt-2">

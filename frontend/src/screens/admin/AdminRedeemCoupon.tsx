@@ -4,24 +4,13 @@ import {
   useGetCouponByIdQuery,
   useRedeemCouponMutation,
 } from "../../slices/achievementSlice";
-import { useState } from "react";
 
 export default function AdminRedeemCoupon() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
-  const [manualCode, setManualCode] = useState("");
-  const [submitManualCode, setSubmitManualCode] = useState(false);
-  const { data: couponData, error } = useGetCouponByIdQuery(
-    !submitManualCode ? id : manualCode
-  );
-  const [redeemCoupon, { isLoading: couponLoading }] =
-    useRedeemCouponMutation();
-
-  const manuallyEnterCode = (e: any) => {
-    e.preventDefault();
-    setSubmitManualCode(true);
-  };
+  const { data: couponData, error } = useGetCouponByIdQuery(id);
+  const [redeemCoupon] = useRedeemCouponMutation();
 
   const redeemHandler = async () => {
     await redeemCoupon(id);
@@ -30,26 +19,17 @@ export default function AdminRedeemCoupon() {
   return (
     <PageWrapper classname="mt-8 text-center">
       <div className="text-2xl mb-4 font-bold">Redeem Coupon Code</div>
-      {couponData ? <CouponCodeResults /> : <ManuallyEnterCode />}
+      {!couponData ? (
+        <div className="max-w-lg mx-auto text-sm  mb-">
+          If customer has the app open, ask them to navigate to their
+          Achievements and open the QR code which you can scan with your phone
+          app.
+        </div>
+      ) : (
+        <CouponCodeResults />
+      )}
     </PageWrapper>
   );
-
-  function ManuallyEnterCode() {
-    return (
-      <div className="max-w-lg mx-auto  rounded-3xl py-8 px-4 border-2 border-base-200 shadow-lg">
-        <div className="text-lg font-bold mb-2">Enter Coupon Code</div>
-
-        <input
-          type="text"
-          onChange={(e) => setManualCode(e.target.value)}
-          className="input input-bordered input-primary w-full max-w-xs"
-        />
-        <button onClick={manuallyEnterCode} className="btn btn-primary">
-          Submit
-        </button>
-      </div>
-    );
-  }
 
   function CouponCodeResults() {
     return (

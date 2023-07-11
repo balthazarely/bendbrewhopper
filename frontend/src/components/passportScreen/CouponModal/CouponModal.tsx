@@ -1,10 +1,17 @@
 import { HiX } from "react-icons/hi";
+import { Coupon } from "../../../types";
+
+interface CouponModalProps {
+  activeCoupon: Coupon | null;
+  couponModalOpen: boolean;
+  setCouponModalOpen: (state: boolean) => void;
+}
 
 export function CouponModal({
   activeCoupon,
   couponModalOpen,
   setCouponModalOpen,
-}: any) {
+}: CouponModalProps) {
   return (
     <div>
       <input
@@ -20,7 +27,6 @@ export function CouponModal({
             className="absolute top-2 right-2 btn btn-sm btn-ghost"
             onClick={() => {
               setCouponModalOpen(false);
-              //   setReviewForEdit(null);
             }}
           >
             <HiX />

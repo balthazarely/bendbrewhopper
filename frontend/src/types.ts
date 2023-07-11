@@ -1,5 +1,5 @@
 export interface UserPassport {
-  breweriesVisited: any[];
+  breweriesVisited: Brewery[];
   createdAt: string;
   email: string;
   isAdmin: boolean;
@@ -73,6 +73,28 @@ export type Review = {
   stars: number;
   style: string;
   timestamp: string;
+  _id: string;
+};
+
+export type Coupon = {
+  achievement: string;
+  createdAt: string;
+  isActive: boolean;
+  prize: string;
+  qrCode: string;
+  updatedAt: string;
+  user: string;
+  _id: string;
+};
+
+export type Achievement = {
+  achivementBreweries: Brewery[];
+  createdAt: string;
+  description: string;
+  name: string;
+  prize: string;
+  updatedAt: string;
+  user: string;
   _id: string;
 };
 

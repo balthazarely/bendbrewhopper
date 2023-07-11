@@ -8,7 +8,7 @@ import {
 import { HiLocationMarker } from "react-icons/hi";
 import { HiPhone } from "react-icons/hi2";
 import { BsGlobe } from "react-icons/bs";
-import { CheckInModal, SingleBreweryMap } from "../components/breweryScreen";
+import { CheckInModal } from "../components/breweryScreen";
 import { useState } from "react";
 import { BeerCard } from "../components/breweryScreen/BeerCard";
 import { HeroBanner } from "../components/elements/HeroBanner";
@@ -39,7 +39,6 @@ export default function BreweryScreen() {
             />
           </div>
         </PageWrapper>
-
         <PageWrapper classname="max-w-4xl w-full -mt-16 px-4">
           <div className="flex items-center justify-between  mb-4 gap-8 ">
             <div className="text-2xl font-bold">{brewery.name}</div>
@@ -83,12 +82,7 @@ export default function BreweryScreen() {
             })}
           </div>
         </PageWrapper>
-
-        {/* <div className="w-full flex h-96 bg-gray-300 rounded-lg relative">
-          <SingleBreweryMap lat={brewery.lat} long={brewery.long} />
-        </div> */}
       </div>
-
       <CheckInModal
         brewery={brewery}
         checkInModalOpen={checkInModalOpen}

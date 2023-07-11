@@ -1,6 +1,5 @@
 import User from "../models/userModel.js";
 import asyncHandler from "../middleware/asyncHandler.js";
-import Achievement from "../models/achievmentModel.js";
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
@@ -43,7 +42,6 @@ const addBeerToPassport = asyncHandler(async (req, res) => {
 
 const removeBeerFromPassport = asyncHandler(async (req, res) => {
   const { _id } = req.body;
-  console.log(_id);
   const user = await User.findById(req.user._id);
   if (user) {
     user.breweriesVisited = user.breweriesVisited.filter(

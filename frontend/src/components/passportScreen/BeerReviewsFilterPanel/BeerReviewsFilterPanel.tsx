@@ -1,10 +1,18 @@
 import { BeerReviewFilter } from "..";
+import { Review } from "../../../types";
+import { FilterProps } from "../BeerReviewsSection/BreweryReviewsSection";
+
+interface BeerReviewsFilterPanelProps {
+  setSelectedFilter: (data: any) => void;
+  userReviews: Review[];
+  selectedFilter: FilterProps;
+}
 
 export function BeerReviewsFilterPanel({
   setSelectedFilter,
   userReviews,
   selectedFilter,
-}: any) {
+}: BeerReviewsFilterPanelProps) {
   const handleIt = (item: any, name: any) => {
     setSelectedFilter((prevState: any) => ({
       ...prevState,
@@ -15,10 +23,10 @@ export function BeerReviewsFilterPanel({
   };
 
   const beerStyles: string[] = Array.from(
-    new Set(userReviews?.map((review: any) => review?.beerId?.style))
+    new Set(userReviews?.map((review: Review) => review?.beerId?.style))
   );
   const breweries: string[] = Array.from(
-    new Set(userReviews?.map((review: any) => review.breweryId.name))
+    new Set(userReviews?.map((review: Review) => review.breweryId.name))
   );
 
   return (
