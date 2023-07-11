@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useRef, useEffect, useContext, useState } from "react";
 import mapboxgl, { LngLatLike, Map, Popup } from "mapbox-gl";
+
 import "mapbox-gl/dist/mapbox-gl.css";
 import { convertToGeoJSON } from "../../../utils/convertToGeoJson";
 import customMarkerImg from "../../../../public/hop.png";
@@ -20,6 +21,8 @@ export function BreweriesMap({
   selectedBrewery,
   sortFilterBy,
 }: BreweriesMapProps) {
+  mapboxgl.workerClass =
+    require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default; // eslint-disable-line
   const geoJSONBreweries = convertToGeoJSON(breweries, "brewery");
   const geoJSONWineries = convertToGeoJSON(breweries, "winery");
 
