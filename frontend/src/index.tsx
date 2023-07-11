@@ -23,12 +23,14 @@ import PassportScreen from "./screens/PassportScreen";
 import BeerScreen from "./screens/BeerScreen";
 import HomeScreen from "./screens/HomeScreen";
 import AdminRedeemCoupon from "./screens/admin/AdminRedeemCoupon";
+import HowItWorks from "./screens/HowItWorks";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
+      <Route path="/how-it-works" element={<HowItWorks />} />
 
       <Route path="" element={<PrivateRoute />}>
         <Route index={true} path="/" element={<HomeScreen />} />

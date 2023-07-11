@@ -11,14 +11,10 @@ const LoginScreen: React.FC = () => {
   const [loginShowing, setLoginShowing] = useState(true);
 
   return (
-    <div className="w-full border-2 border-red-500">
+    <div className="w-full">
       <div className=" mx-auto">
-        <div className="bg-base-200 mx-auto py-12 max-w-xs flex justify-center flex-col ">
-          <div className="font-bold text-center flex flex-col gap-2 text-2xl text-primary  justify-center items-center ">
-            {/* <BiDumbbell className="text-5xl text-base-100 rounded-full  p-1 bg-primary" /> */}
-            Welcome to BendBrewHopper
-          </div>
-          <div className="w-full relative  overflow-x-hidden overflow-y-visible ">
+        <div className="bg-base-100 mx-auto py-4 max-w-xs flex justify-center flex-col ">
+          <div className="w-full relative h-[500px]  overflow-x-hidden  ">
             <div
               className={`transform transition-transform duration-200 px-3 py-6 ${
                 loginShowing ? "translate-x-0" : "-translate-x-full"

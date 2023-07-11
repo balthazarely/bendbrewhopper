@@ -5,12 +5,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../../slices/authSlice";
 import { PageWrapper } from "../../elements";
 import { TbBeer } from "react-icons/tb";
+import { LiaBeerSolid } from "react-icons/lia";
+import { Cross as Hamburger } from "hamburger-react";
+import { closeDrawer, openDrawer } from "../../../slices/uiSlice";
 
 export function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();
   const { userInfo } = useSelector((state: RootState) => state.auth);
+  const { drawerOpen } = useSelector((state: RootState) => state.ui);
 
   const logoutHandler = async () => {
     try {
@@ -19,6 +23,14 @@ export function Navbar() {
       navigate("/login");
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const toggleDrawer = () => {
+    if (!drawerOpen) {
+      dispatch(openDrawer());
+    } else {
+      dispatch(closeDrawer());
     }
   };
 
@@ -31,23 +43,43 @@ export function Navbar() {
   return (
     <div className="w-full fixed h-20 flex items-center bg-base-100 shadow-md z-50 ">
       <PageWrapper classname="w-full gap-4 flex justify-between  items-center">
-        <Link
-          to="/"
-          className="text-2xl font-bold text-accent-content flex items-center"
-        >
-          <TbBeer className="text-4xl" />
-          Bend
-          <span className="text-primary">Brew</span>Hopper
-        </Link>
+        <div className="flex gap-2">
+          <button className=" h-12 w-12 flex justify-center items-center md:hidden btn p-0">
+            <Hamburger size={24} toggle={toggleDrawer} toggled={drawerOpen} />
+          </button>
+          <Link
+            to="/"
+            className="text-2xl font-bold text-accent-content flex items-center"
+          >
+            <LiaBeerSolid className="text-4xl" />
+            {/* <TbBeer className="text-4xl" /> */}
+            <span className="text-primary">Tap</span>Notes
+          </Link>
+        </div>
         <div className="flex items-center gap-2">
-          <Link to="/map" className="btn btn-ghost btn-sm capitalize">
-            Brewery Map
-          </Link>
-          <Link to="/passport" className="btn btn-ghost btn-sm capitalize">
-            My Passport
-          </Link>
+          <div className="hidden md:block">
+            <Link
+              to="/how-it-works"
+              className="btn btn-ghost btn-sm capitalize"
+            >
+              How it works
+            </Link>
+          </div>
           {userInfo ? (
-            <LoggedInView />
+            <>
+              <div className="hidden md:block">
+                <Link to="/map" className="btn btn-ghost btn-sm capitalize">
+                  Brewery Map
+                </Link>
+                <Link
+                  to="/passport"
+                  className="btn btn-ghost btn-sm capitalize"
+                >
+                  My Passport
+                </Link>
+              </div>
+              <LoggedInView />
+            </>
           ) : (
             <Link to={"/login"} className="btn btn-ghost">
               Login

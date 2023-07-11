@@ -30,12 +30,14 @@ export function NearBeweryCard({
       </div>
       <div className=" flex justify-center items-center flex-col ">
         <Link
-          className="font-extrabold text-lg my-3 text-center cursor-pointer"
+          className="font-extrabold text-lg mt-3 text-center cursor-pointer"
           to={`/brewery/${brewery._id}`}
         >
           {brewery.name}
         </Link>
-
+        <div className="text-xs font-bold mb-3">
+          {brewery.distanceTo?.toFixed(0)} ft. away
+        </div>
         <button
           onClick={() => handleCheckIn(brewery)}
           className="btn btn-primary   w-full "

@@ -52,9 +52,9 @@ export function RegisterForm() {
 
   return (
     <>
-      <div className="font-bold text-xl text-center">Create account</div>
+      <div className="font-bold mb-3 text-lg text-center ">Create Account</div>
       <form onSubmit={handleSubmit} className="flex flex-col">
-        <label className="text-sm " htmlFor="email">
+        <label className="text-xs " htmlFor="email">
           Name:
         </label>
         <input
@@ -66,7 +66,7 @@ export function RegisterForm() {
           className="input input-bordered input-primary  mt-1 py-1 px-2 bg-base-100 "
         />
 
-        <label className="text-sm mt-2 " htmlFor="email">
+        <label className="text-xs mt-2 " htmlFor="email">
           Email:
         </label>
         <input
@@ -78,7 +78,7 @@ export function RegisterForm() {
           className="input input-bordered input-primary  mt-1 py-1 px-2 bg-base-100 "
         />
 
-        <label className="text-sm mt-2 " htmlFor="password">
+        <label className="text-xs mt-2 " htmlFor="password">
           Password:
         </label>
         <input
@@ -90,7 +90,7 @@ export function RegisterForm() {
           className="input input-bordered input-primary  mt-1 py-1 px-2 bg-base-100 "
         />
 
-        <label className="text-sm mt-2 " htmlFor="password">
+        <label className="text-xs mt-2 " htmlFor="password">
           Confrim Password:
         </label>
         <input
@@ -106,6 +106,7 @@ export function RegisterForm() {
           disabled={isLoading}
           type="submit"
         >
+          {isLoading && <span className="loading loading-spinner"></span>}
           Sign In
         </button>
       </form>

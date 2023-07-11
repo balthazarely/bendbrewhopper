@@ -5,26 +5,30 @@ import { Brewery, UserLocation } from "../types";
 import { useGetBreweriesQuery } from "../slices/brewerySlice";
 import { NearBeweryCard } from "../components/homeScreen/NearBeweryCard";
 import { CheckInModal } from "../components/breweryScreen";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { HiInformationCircle } from "react-icons/hi";
 
 export default function HomeScreen() {
+  const { userInfo } = useSelector((state: RootState) => state.auth);
+
   return (
     <PageWrapper>
-      <div className="text-2xl mt-8 font-bold text-center">
-        Welcome to Bend Brew Hopper
-      </div>
-      <div className="text-md mt-4 text-center max-w-lg mx-auto">
-        Ready to achieve greatness by drinking and reviewing beers at every
-        single brewery/winery/cibery in Bend, OR? This app allows you to
-        check-in to locations, rate what you drank, and complete achivements in
-        order to reedem coupons for free stuff. To begin, either get within 100
-        feet of a brewery and a card should popup below, allowing you to check
-        in. You can always go to the brewery page and click "Check In" there,
-        and enter the brewery code supplied by the brewery.
-        <div className="divider"></div>
-      </div>
       <div className="mt-8">
+        <div>
+          <div className="text-3xl font-bold text-primary">
+            Welcome, {userInfo?.name}!
+          </div>
+          <div className="divider"></div>
+        </div>
         <div className="text-center text-lg font-bold mb-2">
           Breweries Close By
+          <div
+            className="tooltip ml-1"
+            data-tip="When you're within 100ft of a brewery, you can check in without a code"
+          >
+            <HiInformationCircle />
+          </div>
         </div>
         <div>
           <CloseBreweriesCards />
