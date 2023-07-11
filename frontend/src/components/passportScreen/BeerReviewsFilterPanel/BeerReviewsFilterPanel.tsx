@@ -14,21 +14,16 @@ export function BeerReviewsFilterPanel({
     }));
   };
 
-  // const beerStyles: string[] = [
-  //   ...(new Set(
-  //     userReviews?.map((review: any) => review?.beerId?.style)
-  //   ) as Set<string>),
-  // ];
-
-  // const breweries: string[] = [
-  //   ...(new Set(
-  //     userReviews?.map((review: any) => review.breweryId.name)
-  //   ) as Set<string>),
-  // ];
+  const beerStyles: string[] = Array.from(
+    new Set(userReviews?.map((review: any) => review?.beerId?.style))
+  );
+  const breweries: string[] = Array.from(
+    new Set(userReviews?.map((review: any) => review.breweryId.name))
+  );
 
   return (
     <div className=" col-span-1 rounded-lg p-2 ">
-      {/* <BeerReviewFilter
+      <BeerReviewFilter
         name="style"
         filterItem={beerStyles}
         handleFilterClick={handleIt}
@@ -39,7 +34,7 @@ export function BeerReviewsFilterPanel({
         filterItem={breweries}
         handleFilterClick={handleIt}
         selectedFilters={selectedFilter}
-      /> */}
+      />
     </div>
   );
 }

@@ -50,9 +50,9 @@ export function AchievementsSection({ userPassportData }: any) {
     }
   );
 
-  // const uniqueUserBreweriesVisited = [
-  //   ...new Set(userBreweriesVisited.map((brewery: any) => brewery.id)),
-  // ].map((id) => userBreweriesVisited.find((brewery: any) => brewery.id === id));
+  const uniqueUserBreweriesVisited = Array.from(
+    new Set(userBreweriesVisited.map((brewery: any) => brewery.id))
+  ).map((id) => userBreweriesVisited.find((brewery: any) => brewery.id === id));
 
   if (achievementsLoading) {
     return <FullPageLoader classes="h-56" />;
@@ -62,16 +62,15 @@ export function AchievementsSection({ userPassportData }: any) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
       {achievements?.map((achievement: any) => {
         return (
-          <h1>asf</h1>
-          // <AchievementCard
-          //   key={achievement._id}
-          //   handleOpenCouponModal={handleOpenCouponModal}
-          //   handlePreviewAchievemenetLocations={
-          //     handlePreviewAchievemenetLocations
-          //   }
-          //   uniqueUserBreweriesVisited={uniqueUserBreweriesVisited}
-          //   achievement={achievement}
-          // />
+          <AchievementCard
+            key={achievement._id}
+            handleOpenCouponModal={handleOpenCouponModal}
+            handlePreviewAchievemenetLocations={
+              handlePreviewAchievemenetLocations
+            }
+            uniqueUserBreweriesVisited={uniqueUserBreweriesVisited}
+            achievement={achievement}
+          />
         );
       })}
       <AchievementBreweryModal
